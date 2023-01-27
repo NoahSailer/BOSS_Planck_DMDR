@@ -1,0 +1,53 @@
+# NGCz3
+alpha0_NGCz3:
+  mean:   0.0
+  std: 30.
+  
+alpha2_NGCz3:
+  mean:   0.0
+  std: 50.
+
+SN0_NGCz3:
+  mean:   0.0
+  std: 2000.
+  
+SN2_NGCz3:
+  mean:   0.0
+  std: 5.0e+4
+
+# SGCz3
+alpha0_SGCz3:
+  mean:   0.0
+  std: 30.
+  
+alpha2_SGCz3:
+  mean:   0.0
+  std: 50.
+  
+SN0_SGCz3:
+  mean:   0.0
+  std: 2000.
+  
+SN2_SGCz3:
+  mean:   0.0
+  std: 5.0e+4
+  
+    
+# Post-recon parameters
+# For these priors we take the philosophy that rba0^2 (a0 + a1/rbao) <~ <rbao^2 xi> ~ 50
+# i.e. a0 <~ 5e-3, a2 <~ 5e-1, and we enforce a 10x wide Gaussian prior on this estimation
+M0_z3:
+  mean: 0.
+  std: 5.0e-2
+  
+M1_z3:
+  mean: 0.
+  std: 5.
+  
+Q0_z3:
+  mean: 0.
+  std: 5.0e-2
+  
+Q1_z3:
+  mean: 0.
+  std: 5.

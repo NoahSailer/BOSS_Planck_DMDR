@@ -1,0 +1,28 @@
+zfid:     0.59
+
+fs_sample_names:
+- NGCz3
+- SGCz3
+
+# The paths below assume the code/chain is running in the parent
+# directory where the BOSSxPlanck repo has been cloned.
+# Otherwise, override these with the full path.
+fs_datfns: 
+- data/fs_bao/pk/pk_NGC_z3.dat
+- data/fs_bao/pk/pk_SGC_z3.dat
+
+bao_sample_names:
+- z3
+
+bao_datfns: 
+- data/fs_bao/xi/z3.xi
+
+covfn: data/fs_bao/covariances/cov_joint_NGCSGCXi_z3.dat
+
+fs_matMfns: 
+- data/fs_bao/matrices/M_BOSS_DR12_NGC_z3_V6C_1_1_1_1_1_1200_2000.matrix.gz
+- data/fs_bao/matrices/M_BOSS_DR12_SGC_z3_V6C_1_1_1_1_1_1200_2000.matrix.gz
+
+fs_matWfns: 
+- data/fs_bao/matrices/W_BOSS_DR12_NGC_z3_V6C_1_1_1_1_1_10_200_2000_averaged_v1.matrix.gz
+- data/fs_bao/matrices/W_BOSS_DR12_SGC_z3_V6C_1_1_1_1_1_10_200_2000_averaged_v1.matrix.gz

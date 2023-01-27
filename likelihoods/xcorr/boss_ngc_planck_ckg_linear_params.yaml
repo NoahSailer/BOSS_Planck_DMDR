@@ -1,0 +1,16 @@
+# Extra variables needed for the lensing
+alpha_x_NGCz3:
+  mean:   0.0
+  std: 30.
+
+smag_NGCz3:
+  mean: 1.05
+  std: 0.11
+
+alpha_x_NGCz1:
+  mean:   0.0
+  std: 30.
+
+smag_NGCz1:
+  mean:   0.77
+  std: 0.02

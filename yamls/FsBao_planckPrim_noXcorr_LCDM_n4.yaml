@@ -1,0 +1,335 @@
+theory:
+  classy_emu.classy_emu:
+    python_path:  /global/home/users/nsailer/BOSS_Planck_DMDR/emulators/
+    emu_Cl_path : /global/home/users/nsailer/BOSS_Planck_DMDR/emulators/emulators_Planck_idm_dr_n4_nonlinear_halofit.bson
+    emu_Pk_path : /global/home/users/nsailer/BOSS_Planck_DMDR/emulators/emulator_Pk_cb_n4_hubble.bson
+
+likelihood:
+  ### CMB primary
+  planck_2018_lowl.TT:
+  planck_2018_lowl.EE:
+  planck_2018_highl_plik.TTTEEE_lite:
+  
+  ### CMB lensing auto
+  planck_2018_lensing.clik:
+  
+  ### BOSS full shape and BAO
+  # z3
+  joint_boss_likelihoods.FullShapePlusBAO_Z3:
+    python_path: /global/home/users/nsailer/BOSS_Planck_DMDR/likelihoods/fs_bao/
+    basedir:     /global/home/users/nsailer/BOSS_Planck_DMDR/
+    linear_param_dict_fn: likelihoods/fs_bao/bossz3_rsd_linear_params.yaml
+    optimize: False
+    include_priors: True
+    n_idm_dr: 4
+    fs_kmins:
+    - 0.02
+    - 0.02
+    fs_mmaxs:
+    - 0.20
+    - 0.20
+    fs_qmaxs:
+    - 0.20
+    - 0.20
+    bao_rmins:
+    - 80.
+    bao_rmaxs:
+    - 130.
+    stop_at_error: True
+  # z1  
+  joint_boss_likelihoods.FullShapePlusBAO_Z1:
+    python_path: /global/home/users/nsailer/BOSS_Planck_DMDR/likelihoods/fs_bao/
+    basedir:     /global/home/users/nsailer/BOSS_Planck_DMDR/
+    linear_param_dict_fn: likelihoods/fs_bao/bossz1_rsd_linear_params.yaml
+    optimize: False
+    include_priors: True
+    n_idm_dr: 4
+    fs_kmins:
+    - 0.02
+    - 0.02
+    fs_mmaxs:
+    - 0.20
+    - 0.20
+    fs_qmaxs:
+    - 0.20
+    - 0.20
+    bao_rmins:
+    - 80.
+    bao_rmaxs:
+    - 130.
+    stop_at_error: True
+    
+       
+params:
+#####################################################
+# cosmology
+#####################################################
+  #sample log_A_s
+  log_A_s:
+    prior:
+      dist: uniform
+      min:  1.61
+      max:  3.91
+    ref:
+      dist:  norm
+      loc:   3.00
+      scale: 0.05
+    latex: \ln(10^{10} A_s)
+    drop: True
+  # feed A_s into likelihoods
+  A_s:
+    value: "lambda log_A_s: np.exp(log_A_s)*1e-10"
+    latex: A_s
+  #
+  n_s:
+    prior:
+      min: 0.93
+      max: 0.999
+    ref:
+      dist:  norm
+      loc:   0.9649
+      scale: 0.004
+    latex: n_s
+  #
+  h:
+    prior:
+      min: 0.6
+      max: 0.8
+    ref:
+      dist: norm
+      loc:  0.692267
+      scale: 0.01
+    latex: h
+  tau_reio:
+    prior:
+      min: 0.02
+      max: 0.1
+    ref:
+      dist:  norm
+      loc:   0.0544
+      scale: 0.007
+    latex: \tau
+  #
+  omega_b:
+    prior:
+      min: 0.01
+      max: 0.04
+    ref:
+      dist:  norm
+      loc: 0.022
+      scale: 0.001
+    latex: \omega_b
+  #
+  omega_cdm:
+    prior:
+      min: 0.06
+      max: 0.18
+    ref:
+      dist:  norm
+      loc:   0.12
+      scale: 0.01
+    latex: \omega_c
+  #
+  a_dark: 1000.
+  #
+  xi_idr: 0.01
+#####################################################
+# nuisance
+#####################################################
+  # NGCz3
+  b1_NGCz3:
+    prior:
+      dist: uniform
+      min:  -0.375
+      max:  2.75
+    ref:
+      dist:  norm
+      loc:   1.28
+      scale: 0.1
+    latex: b_1^{N3}
+  b2_NGCz3:
+    prior:
+      dist:  norm
+      loc:   0.0
+      scale: 10.
+    ref:
+      dist:  norm
+      loc:   -2.8775721
+      scale: 0.1
+    latex: b_2^{N3}
+  bs_NGCz3:
+    prior:
+      dist:  norm
+      loc:   0.0
+      scale: 5.0
+    ref:
+      dist:  norm
+      loc:   1.3425739
+      scale: 0.1
+    latex: b_s^{N3}     
+    
+  # SGCz3
+  b1_SGCz3:
+    prior:
+      dist: uniform
+      min:  -0.375
+      max:  2.75
+    ref:
+      dist:  norm
+      loc:   1.13
+      scale: 0.1
+    latex: b_1^{S3}
+  b2_SGCz3:
+    prior:
+      dist:  norm
+      loc:   0.0
+      scale: 10.
+    ref:
+      dist:  norm
+      loc:   0.82613992
+      scale: 0.1
+    latex: b_2^{S3}
+  bs_SGCz3:
+    prior:
+      dist:  norm
+      loc:   0.0
+      scale: 5.0
+    ref:
+      dist:  norm
+      loc:   -1.401814
+      scale: 0.1
+    latex: b_s^{S3}    
+    
+  # NGCz1
+  b1_NGCz1:
+    prior:
+      dist: uniform
+      min:  -0.375
+      max:  2.75
+    ref:
+      dist:  norm
+      loc:   1.28
+      scale: 0.1
+    latex: b_1^{N1}
+  b2_NGCz1:
+    prior:
+      dist:  norm
+      loc:   0.0
+      scale: 10.
+    ref:
+      dist:  norm
+      loc:   -1.3032863
+      scale: 0.1
+    latex: b_2^{N1}
+  bs_NGCz1:
+    prior:
+      dist:  norm
+      loc:   0.0
+      scale: 5.0
+    ref:
+      dist:  norm
+      loc:   1.1374705
+      scale: 0.1
+    latex: b_s^{N1} 
+    
+  # SGCz1
+  b1_SGCz1:
+    prior:
+      dist: uniform
+      min:  -0.375
+      max:  2.75
+    ref:
+      dist:  norm
+      loc:   1.
+      scale: 0.1
+    latex: b_1^{S1}
+  b2_SGCz1:
+    prior:
+      dist:  norm
+      loc:   0.0
+      scale: 10.
+    ref:
+      dist:  norm
+      loc:   -0.54533033
+      scale: 0.1
+    latex: b_2^{S1}
+  bs_SGCz1:
+    prior:
+      dist:  norm
+      loc:   0.0
+      scale: 5.0
+    ref:
+      dist:  norm
+      loc:   0.7529962
+      scale: 0.1
+    latex: b_s^{S1}
+    
+  # Post-recon parameters
+  B1_z3:
+    prior:
+      dist: uniform
+      min: 0.0
+      max: 5.0
+    ref:
+      dist: norm
+      loc: 1.12
+      scale: 0.1
+    latex: B_1^{z3}
+  F_z3:
+    prior:
+      dist: uniform
+      min: 0.0
+      max: 5.0
+    ref:
+      dist: norm
+      loc: 0.63
+      scale: 0.1
+    latex: F^{z3}
+  B1_z1:
+    prior:
+      dist: uniform
+      min: 0.0
+      max: 5.0
+    ref:
+      dist: norm
+      loc: 1.12
+      scale: 0.1
+    latex: B_1^{z1}
+  F_z1:
+    prior:
+      dist: uniform
+      min: 0.0
+      max: 5.0
+    ref:
+      dist: norm
+      loc: 0.63
+      scale: 0.1
+    latex: F^{z1}
+     
+sampler:
+  mcmc:
+    #covmat: chains/bossz3_joint.covini
+    learn_proposal: True
+    learn_proposal_Rminus1_max: 30.
+    output_every: 60s
+    measure_speeds: True
+    max_tries: 500
+    oversample_power: 0.4
+    proposal_scale: 1.5
+    Rminus1_stop: 0.01 
+
+#sampler:
+#  mcmc:
+#    learn_proposal: True
+#    learn_proposal_Rminus1_max: 30.
+#    output_every: 60s
+#    measure_speeds: False
+#    max_tries: 500
+#    oversample_power: 0.4
+#    proposal_scale: 1.5
+#    Rminus1_stop: 0.01
+#    drag: False
+
+output: /global/home/users/nsailer/BOSS_Planck_DMDR/chains/no_xcorr_LCDM_n4/no_xcorr
+timing: True
+stop_on_error: True

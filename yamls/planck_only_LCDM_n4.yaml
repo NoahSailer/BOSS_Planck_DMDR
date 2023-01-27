@@ -1,0 +1,117 @@
+theory:
+  classy_emu.classy_emu:
+    python_path:  /global/home/users/nsailer/BOSS_Planck_DMDR/emulators/
+    emu_Cl_path : /global/home/users/nsailer/BOSS_Planck_DMDR/emulators/emulators_Planck_idm_dr_n4_nonlinear_halofit.bson
+    emu_Pk_path : /global/home/users/nsailer/BOSS_Planck_DMDR/emulators/emulator_Pk_cb_n4_hubble.bson
+
+likelihood:
+  ### CMB primary
+  planck_2018_lowl.TT:
+  planck_2018_lowl.EE:
+  planck_2018_highl_plik.TTTEEE_lite:
+  
+  ### CMB lensing auto
+  planck_2018_lensing.clik:
+  
+       
+params:
+#####################################################
+# cosmology
+#####################################################
+  #sample log_A_s
+  log_A_s:
+    prior:
+      dist: uniform
+      min:  1.61
+      max:  3.91
+    ref:
+      dist:  norm
+      loc:   3.00
+      scale: 0.05
+    latex: \ln(10^{10} A_s)
+    drop: True
+  # feed A_s into likelihoods
+  A_s:
+    value: "lambda log_A_s: np.exp(log_A_s)*1e-10"
+    latex: A_s
+  #
+  n_s:
+    prior:
+      min: 0.93
+      max: 0.999
+    ref:
+      dist:  norm
+      loc:   0.9649
+      scale: 0.004
+    latex: n_s
+  #
+  h:
+    prior:
+      min: 0.6
+      max: 0.8
+    ref:
+      dist: norm
+      loc:  0.692267
+      scale: 0.01
+    latex: h
+  tau_reio:
+    prior:
+      min: 0.02
+      max: 0.1
+    ref:
+      dist:  norm
+      loc:   0.0544
+      scale: 0.007
+    latex: \tau
+  #
+  omega_b:
+    prior:
+      min: 0.01
+      max: 0.04
+    ref:
+      dist:  norm
+      loc: 0.022
+      scale: 0.001
+    latex: \omega_b
+  #
+  omega_cdm:
+    prior:
+      min: 0.06
+      max: 0.18
+    ref:
+      dist:  norm
+      loc:   0.12
+      scale: 0.01
+    latex: \omega_c
+  #
+  a_dark: 1000.
+  #
+  xi_idr: 0.01    
+       
+sampler:
+  mcmc:
+    #covmat: /global/home/users/nsailer/BOSS_Planck_DMDR/chains/planck_only_n4/planck.covmat
+    learn_proposal: True
+    learn_proposal_Rminus1_max: 20.
+    output_every: 60s
+    measure_speeds: True
+    max_tries: 500
+    oversample_power: 0.4
+    proposal_scale: 1.5
+    Rminus1_stop: 0.01 
+
+#sampler:
+#  mcmc:
+#    learn_proposal: True
+#    learn_proposal_Rminus1_max: 30.
+#    output_every: 60s
+#    measure_speeds: False
+#    max_tries: 500
+#    oversample_power: 0.4
+#    proposal_scale: 1.5
+#    Rminus1_stop: 0.01
+#    drag: False
+
+output: /global/home/users/nsailer/BOSS_Planck_DMDR/chains/planck_only_LCDM_n4/planck
+timing: True
+stop_on_error: True
